@@ -1,3 +1,4 @@
+name: OWASP ZAP SCAN
 on: workflow_dispatch
 
 jobs:
