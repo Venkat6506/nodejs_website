@@ -1,4 +1,4 @@
-on: [push]
+on: workflow_dispatch
 
 jobs:
   zap_scan:
@@ -13,6 +13,6 @@ jobs:
         uses: zaproxy/action-full-scan@v0.4.0
         with:
           docker_name: 'owasp/zap2docker-stable'
-          target: 'http://testphp.vulnweb.com/'
+          target: 'http://54.173.254.181:3000/'
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a'
