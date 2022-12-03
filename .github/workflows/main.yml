@@ -7,7 +7,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Run Polaris tests
-        uses: loadbalancerorg/polaris-action@v1.1
+        uses: loadbalancerorg/polaris-action@v1
         with: 
           server_url: "https://scan.coverity.com/projects/venkat6506-nodejs_website"
           access_token: "IO6pUJB6BRZ7b8OKGf5l5g"
