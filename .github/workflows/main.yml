@@ -1,19 +1,18 @@
-name: CI Dooer
-on: push
+on: [push]
+
 jobs:
-  coverity_polaris_check:
+  zap_scan:
     runs-on: ubuntu-latest
+    name: Scan the webapplication
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v2
-      - name: Run Polaris tests
-        uses: loadbalancerorg/polaris-action@v1
-        with: 
-          server_url: "https://scan.coverity.com/projects/venkat6506-nodejs_website"
-          access_token: "IO6pUJB6BRZ7b8OKGf5l5g"
-          total_issues: 5
-          new_issues: 4
-          cli_scan_json_file: .synopsys/polaris/cli-scan.json
-          
-          
-          
+        with:
+          ref: main
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.4.0
+        with:
+          docker_name: 'owasp/zap2docker-stable'
+          target: 'http://testphp.vulnweb.com/'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a'
