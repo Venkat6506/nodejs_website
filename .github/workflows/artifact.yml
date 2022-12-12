@@ -19,4 +19,19 @@ jobs:
           name: dist-without-markdown
           path: |
             ./
+
+
+      - name: Download a single artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-without-markdown
+
+      - name: Deploy to my EC2 instance
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          SOURCE: "./"
+          REMOTE_HOST: "ec2-52-23-183-201.compute-1.amazonaws.com"
+          REMOTE_USER: "ubuntu"
+          TARGET: "/home/SampleNode"
    
