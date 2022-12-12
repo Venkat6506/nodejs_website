@@ -25,6 +25,8 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: dist-without-markdown
+          path: |
+            ./
 
       - name: Deploy to my EC2 instance
         uses: easingthemes/ssh-deploy@v2.1.5
