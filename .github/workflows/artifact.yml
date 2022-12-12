@@ -25,6 +25,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: kvg
+        path: /home/ubuntu/
     - name: test
       run: ls -R
       
