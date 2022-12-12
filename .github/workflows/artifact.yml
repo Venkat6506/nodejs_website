@@ -20,11 +20,9 @@ jobs:
           path: |
             ./
 
-      - name: art
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         
-      - name: hvg
-        uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v3
         with:
           name: dist-without-markdown
 
