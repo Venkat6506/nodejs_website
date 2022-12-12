@@ -33,7 +33,7 @@ app.post('/register', async (req, res) => {
             users.push(newUser);
             console.log('User list', users);
     
-            res.send("<div align ='center'><h2>Registration successfulll</h2></div><br><br><div align='center'><a href='./login.html'>login</a></div><br><br><div align='center'><a href='./registration.html'>Register another user</a></div>");
+            res.send("<div align ='center'><h2>Registration successfulll</h2></div><br><br><div align='center'><a href='./login.html'>login11</a></div><br><br><div align='center'><a href='./registration.html'>Register another user</a></div>");
         } else {
             res.send("<div align ='center'><h2>Email already used</h2></div><br><br><div align='center'><a href='./registration.html'>Register again</a></div>");
         }
