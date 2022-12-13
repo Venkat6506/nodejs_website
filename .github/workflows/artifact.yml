@@ -28,7 +28,10 @@ jobs:
         path: /home/ubuntu/
     - name: test
       run: ls -R
-      
+    - name: running applicaion
+      run: |
+        npm install
+        node app.js
     
     
   
