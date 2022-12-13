@@ -32,8 +32,8 @@ jobs:
       run: ls -R
     - name: running applicaion
       run: |
-        npm install
-        node app.js
+        sudo npm install pm2 -g
+        pm2 start app.js
     
     
   
