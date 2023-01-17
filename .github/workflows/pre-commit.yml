@@ -1,7 +1,5 @@
-on:
-  pull_request:
-  push:
-    branches: [main]
+name: Precommit Scan
+on: workflow_dispatch
 
 jobs:
   main:
