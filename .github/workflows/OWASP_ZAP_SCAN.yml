@@ -1,6 +1,6 @@
 name: OWASP ZAP SCAN
 on: workflow_dispatch
-
+ 
 jobs:
   zap_scan:
     runs-on: ubuntu-latest
