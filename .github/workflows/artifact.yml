@@ -31,9 +31,9 @@ jobs:
 
     - name: test
       run: ls -l
-    - name: Running Applicaion
-      run: |
-        pm2 restart app.js -f
+#     - name: Running Applicaion
+#       run: |
+#         pm2 restart app.js -f
     
     
   
