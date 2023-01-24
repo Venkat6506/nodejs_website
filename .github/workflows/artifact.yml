@@ -27,12 +27,12 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: kvg
-        path: /home/ubuntu/
+        path: /home/ubuntu/nodejs_website
+
     - name: test
       run: ls -R
     - name: Running Applicaion
       run: |
-        sudo npm install pm2 -g
         pm2 restart app.js -f
     
     
