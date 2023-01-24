@@ -30,7 +30,7 @@ jobs:
         path: /home/ubuntu/nodejs_website
 
     - name: test
-      run: ls -R
+      run: ls -l
     - name: Running Applicaion
       run: |
         pm2 restart app.js -f
