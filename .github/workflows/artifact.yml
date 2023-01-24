@@ -33,7 +33,7 @@ jobs:
     - name: Running Applicaion
       run: |
         sudo npm install pm2 -g
-        pm2 start app.js -f
+        pm2 restart app.js -f
     
     
   
