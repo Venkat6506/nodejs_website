@@ -1,0 +1,45 @@
+name: DevSecOps pipeline
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  pre-commit-checks:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Use Node.js
+      run:  echo "::set-env name=NODE_VERSION::$(curl -L -s https://nodejs.org/dist/latest/SHASUMS256.txt | awk '{print $2}')"
+    - name: Use Node.js 
+      run:  echo "::add-matcher::$GITHUB_ENV/node.version.matcher.yml"
+    - name: Install dependencies
+      run: npm install
+    - name: Run pre-commit hooks
+      run: npx pre-commit run --all-files
+    - name: Run SCA
+      run: npx snyk test
+    - name: Run SAST
+      run: npx retire --scanAll
+    - name: Run OWASP
+      run: npx owasp-zap-security-scanner --scan
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Use Node.js
+      run:  echo "::set-env name=NODE_VERSION::$(curl -L -s https://nodejs.org/dist/latest/SHASUMS256.txt | awk '{print $2}')"
+    - name: Use Node.js 
+      run:  echo "::add-matcher::$GITHUB_ENV/node.version.matcher.yml"
+    - name: Install dependencies
+      run: npm install
+    - name: Run tests
+      run: npm test
+    - name: Run DAST
+      run: npx dast-scanner --scan
+    - name: Run SonarCloud
+      run: npx sonar-scanner -Dsonar.projectKey=YOUR_PROJECT_KEY -Dsonar.organization=YOUR_ORGANIZATION_KEY -Dsonar.sources=.
