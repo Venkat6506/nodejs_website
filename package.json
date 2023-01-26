@@ -4,13 +4,12 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/souvik-pl/login1.git",
-    "test": "jest",
-    "lint": "eslint ."
+    "url": "git+https://github.com/souvik-pl/login1.git"
   },
   "author": "souvik",
   "license": "ISC",
