@@ -1,5 +1,5 @@
 {
-  "name": "login",
+  "name": "login1",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/souvik-pl/login1.git"
+    "url": "git+https://github.com/souvik-pl/login1.git",
     "test": "jest",
     "lint": "eslint ."
   },
