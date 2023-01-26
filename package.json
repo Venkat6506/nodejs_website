@@ -9,6 +9,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/souvik-pl/login1.git"
+    "test": "jest",
+    "lint": "eslint ."
   },
   "author": "souvik",
   "license": "ISC",
@@ -20,5 +22,10 @@
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test"
+    }
   }
 }
