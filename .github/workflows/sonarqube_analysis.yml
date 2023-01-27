@@ -1,19 +1,40 @@
-name: SONARQUBE ANALYSIS SCAN
+# name: SONARQUBE ANALYSIS SCAN
 
-on: workflow_dispatch
+# on: workflow_dispatch
+
+# jobs:
+#   sonarqube:
+#     name: SonarQube Trigger
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Checking out
+#       uses: actions/checkout@master
+#       with:
+#         # Disabling shallow clone is recommended for improving relevancy of reporting
+#         fetch-depth: 0
+#     - name: SonarQube Scan
+#       uses: kitabisa/sonarqube-action@v1.2.0
+#       with:
+#         host: ${{ secrets.SONARQUBE_HOST }}
+#         login: ${{ secrets.SONARQUBE_TOKEN }}
+
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
 
 jobs:
-  sonarqube:
-    name: SonarQube Trigger
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
-    - name: Checking out
-      uses: actions/checkout@master
-      with:
-        # Disabling shallow clone is recommended for improving relevancy of reporting
-        fetch-depth: 0
-    - name: SonarQube Scan
-      uses: kitabisa/sonarqube-action@v1.2.0
-      with:
-        host: ${{ secrets.SONARQUBE_HOST }}
-        login: ${{ secrets.SONARQUBE_TOKEN }}
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONARQUBE_HOST }}
