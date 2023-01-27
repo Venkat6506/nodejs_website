@@ -52,7 +52,7 @@ jobs:
         SONAR_HOST_URL: ${{ secrets.SONARQUBE_HOST }}
 
   OWASP:
-    name: OWASPZAPSCAN
+    name: OWASP_ZAP_SCAN
     runs-on: self-hosted
     needs: SONARQUBE
     steps:
