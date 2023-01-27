@@ -18,12 +18,9 @@
 #         host: ${{ secrets.SONARQUBE_HOST }}
 #         login: ${{ secrets.SONARQUBE_TOKEN }}
 
-name: Build
+name: SONARQUBE ANALYSIS SCAN
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
 
 
 jobs:
