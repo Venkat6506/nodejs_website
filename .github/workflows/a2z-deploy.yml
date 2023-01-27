@@ -65,6 +65,6 @@ jobs:
       uses: zaproxy/action-full-scan@v0.4.0
       with:
           docker_name: 'owasp/zap2docker-stable'
-          target: 'http://54.166.138.136:3000/'
+          target: 'http://54.90.39.95:3000/'
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a'
