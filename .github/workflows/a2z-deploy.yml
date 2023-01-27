@@ -41,7 +41,7 @@ jobs:
   SONARQUBE:
     name: SAST_SCAN_SONARQUBE
     runs-on: self-hosted
-    needs: CD
+    needs: PRECOMMIT
     steps:
     - uses: actions/checkout@v2
       with:
@@ -54,7 +54,7 @@ jobs:
   OWASP:
     name: OWASPZAPSCAN
     runs-on: self-hosted
-    needs: PRECOMMIT
+    needs: SONARQUBE
     steps:
     - name: Checkout
       uses: actions/checkout@v2
