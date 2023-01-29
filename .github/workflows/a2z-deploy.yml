@@ -79,8 +79,8 @@ jobs:
         name: kvg
         path: ./
         
-  POST_CD: 
-    name: POST_CD
+  PRE_DEPLOYMENT: 
+    name: PRE_DEPLOYMENT
     runs-on: ubuntu-latest
     needs: CI
     steps:
