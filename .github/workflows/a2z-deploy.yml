@@ -79,7 +79,7 @@ jobs:
     needs: CI
     steps:
     - name: Deploy to my EC2 instance
-      uses: easingthemes/ssh-deploy@v2.1.5
+      uses: actions/download-artifact@v3
       env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           SOURCE: "./"
