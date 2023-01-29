@@ -97,3 +97,23 @@ jobs:
           REMOTE_HOST: "ec2-54-90-39-95.compute-1.amazonaws.com"
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/nodejs_website"
+          
+  POST_DEPLOYMENT: 
+    name: POST_DEPLOYMENT
+    runs-on: ubuntu-latest
+    environment: 'PROD'
+    needs: PRE_DEPLOYMENT
+    steps:
+    - name: Download Artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: kvg
+        path: ./
+    - name: Deploy to my EC2 instance
+      uses: easingthemes/ssh-deploy@v2.1.5
+      env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          SOURCE: "./"
+          REMOTE_HOST: "ec2-54-90-39-95.compute-1.amazonaws.com"
+          REMOTE_USER: "ubuntu"
+          TARGET: "/home/ubuntu/nodejs_website"
