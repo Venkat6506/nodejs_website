@@ -66,23 +66,28 @@ jobs:
 #     runs-on: self-hosted
 #     needs: CI
 #     steps:
-#     - name: Download Artifacts
-#       uses: actions/download-artifact@v3
-#       with:
-#         name: kvg
-#         path: /home/ubuntu/nodejs_website
+    - name: Download Artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: kvg
+        path: /home/ubuntu/nodejs_website
         
   POST_CD:
+    
     name: POST_CD
-#     runs-on: self-hosted
     runs-on: ubuntu-latest
     needs: CI
     steps:
-    - name: Deploy to my EC2 instance
+    - name: Download Artifacts
       uses: actions/download-artifact@v3
+      with:
+        name: kvg
+        path: ./test
+    - name: Deploy to my EC2 instance
+      uses: easingthemes/ssh-deploy@v2.1.5
       env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          SOURCE: "./"
+          SOURCE: "./test"
           REMOTE_HOST: "ec2-54-90-39-95.compute-1.amazonaws.com"
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/nodejs_website"
