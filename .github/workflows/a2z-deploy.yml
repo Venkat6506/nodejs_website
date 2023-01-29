@@ -33,7 +33,7 @@ jobs:
   SONARQUBE:
     name: SAST_SCAN_SONARQUBE
     runs-on: ubuntu-latest
-    needs: SYNK_SCAN
+    needs: PRECOMMIT
     steps:
     - uses: actions/checkout@v2
       with:
@@ -46,7 +46,7 @@ jobs:
   OWASP:
     name: OWASP_ZAP_SCAN
     runs-on: ubuntu-latest
-    needs: [SONARQUBE, SYNK_SCAN]
+    needs: PRECOMMIT
     steps:
     - name: Checkout
       uses: actions/checkout@v2
