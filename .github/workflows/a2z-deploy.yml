@@ -46,7 +46,7 @@ jobs:
   OWASP:
     name: OWASP_ZAP_SCAN
     runs-on: ubuntu-latest
-    needs: PRECOMMIT
+    needs: SONARQUBE
     steps:
     - name: Checkout
       uses: actions/checkout@v2
