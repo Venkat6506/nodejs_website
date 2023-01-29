@@ -114,6 +114,6 @@ jobs:
       env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           SOURCE: "./"
-          REMOTE_HOST: "ec2-54-90-39-95.compute-1.amazonaws.com"
+          REMOTE_HOST: "ec2-18-204-202-234.compute-1.amazonaws.com"
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/nodejs_website"
