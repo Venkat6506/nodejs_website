@@ -59,7 +59,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: kvg
-        path: ./
+        path: ./test
         
 #   PRE_CD:
 #     name: PRE_CD
