@@ -43,7 +43,8 @@ jobs:
 
   CI:
     name: CI
-    runs-on: self-hosted
+#     runs-on: self-hosted
+    runs-on: ubuntu-latest
 #     needs: OWASP
     steps:
     - name: c
@@ -73,7 +74,8 @@ jobs:
         
   POST_CD:
     name: POST_CD
-    runs-on: self-hosted
+#     runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: CI
     steps:
     - name: Deploy to my EC2 instance
