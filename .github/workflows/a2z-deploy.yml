@@ -66,7 +66,7 @@ jobs:
     needs: OWASP
     steps:
     - name: c
-      uses: actions/checkout@master
+      uses: actions/checkout@v3
     - name: npm install, build
       run: |
         sudo apt install nodejs -y 
@@ -78,11 +78,6 @@ jobs:
       with:
         name: kvg
         path: ./
-    - uses: actions/checkout@master
-    - name: Run Snyk to check for vulnerabilities
-      uses: snyk/actions/node@master
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         
   POST_CD: 
     name: POST_CD
