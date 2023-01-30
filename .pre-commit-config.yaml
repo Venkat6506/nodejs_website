@@ -6,8 +6,8 @@ repos:
     -   id: check-yaml
 #     -   id: trailing-whitespace
 #     -   id: end-of-file-fixer
-- repo: https://github.com/EconomistDigitalSolutions/cp-precommit-snyk.git
+- repo: https://github.com/Venkat6506/nodejs_website.git
   rev: v4.3.0
-  sha: master
+  sha: main
   hooks:
     - id: snyk-audit
