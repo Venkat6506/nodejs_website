@@ -1,6 +1,0 @@
--   id: snyk-audit
-    name: snyk-audit
-    description: Audit javascript library with Snyk.
-    entry: snyk-audit.sh
-    args: [--file=src/dummy/package.json]
-    language: script
