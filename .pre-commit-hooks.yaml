@@ -1,0 +1,23 @@
+---
+- id: snyk-container
+  name: Snyk Container
+  description: Runs 'snyk container test' command
+  entry: hooks/snyk-container.sh
+  language: script
+  pass_filenames: true
+  files: Dockerfile
+  types: [file, text]
+
+- id: snyk-iac
+  name: Snyk IaC
+  description: Runs 'snyk iac test' command
+  entry: hooks/snyk-iac.sh
+  language: script
+  pass_filenames: false
+
+- id: snyk-test
+  name: Snyk Test
+  description: Runs 'snyk test' command
+  entry: hooks/snyk-test.sh
+  language: script
+  pass_filenames: false
