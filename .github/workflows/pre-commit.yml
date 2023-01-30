@@ -6,6 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: mode1
+      run: ls -l
+    - name: mode2
+      run: pwd
     - name: mode
       run: chmod 777 hooks/*
     - uses: actions/setup-python@v3
