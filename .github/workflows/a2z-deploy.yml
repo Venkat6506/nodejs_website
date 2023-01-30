@@ -63,7 +63,7 @@ jobs:
   CI:
     name: CI
     runs-on: ubuntu-latest
-    needs: OWASP
+    needs: [SYNK_SCAN, SONARQUBE, OWASP]
     steps:
     - name: c
       uses: actions/checkout@v3
