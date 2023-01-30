@@ -6,5 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: mode
+      run: chmod 777 hooks/*
     - uses: actions/setup-python@v3
     - uses: pre-commit/action@v3.0.0
