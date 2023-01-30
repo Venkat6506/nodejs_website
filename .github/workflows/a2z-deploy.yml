@@ -7,7 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v3
-#     - uses: pre-commit/action@v3.0.0 # need to uncomment to run pre-commit.
+    - uses: Venkat6506/nodejs_website@v3.0.0
 
   SYNK_SCAN:
     name: SYNK_SCAN
