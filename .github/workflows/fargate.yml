@@ -2,8 +2,6 @@ name: test
 
 on: workflow_dispatch
 
-name: internal runners
-
 permissions:
   id-token: write # this permission is required to authorize the request for the GitHub OIDC token used by the configure-aws-credentials action
 
@@ -27,7 +25,7 @@ jobs:
 
   test-self-hosted:
     name: Testing self-hosted tag
-    needs: start-runner
+    needs: start-runners
     runs-on: self-hosted
     steps:
       - name: step 1
@@ -35,7 +33,7 @@ jobs:
 
   test-internal-tools:
     name: Testing internal tool connectivity
-    needs: start-runner
+    needs: start-runners
     runs-on: self-hosted
     steps:
       - name: curl selenium
