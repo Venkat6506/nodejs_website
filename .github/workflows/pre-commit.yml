@@ -11,6 +11,6 @@ jobs:
     - name: mode2
       run: pwd
     - name: mode
-      run: chmod 777 hooks/*
+      run: chmod 777 /home/runner/work/nodejs_website/nodejs_website
     - uses: actions/setup-python@v3
     - uses: pre-commit/action@v3.0.0
