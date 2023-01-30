@@ -7,6 +7,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v3
-    - name: test
-      run: pre-commit run --all-files
     - uses: pre-commit/action@v3.0.0
