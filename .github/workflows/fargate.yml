@@ -1,0 +1,63 @@
+name: test
+
+on: workflow_dispatch
+
+name: internal runners
+
+permissions:
+  id-token: write # this permission is required to authorize the request for the GitHub OIDC token used by the configure-aws-credentials action
+
+jobs:
+  start-runners:
+    name: Provision self-hosted runners
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: us-east-1
+          role-to-assume: ${{ secrets.OIDC_IAM_ROLE_ARN }}
+
+      - name: Scale up ECS service
+        uses: Enterprise-CMCS/ecs-scale-service@main
+        with:
+          cluster: "gh-runner-19c141d0-fc19-53bb-ad43-772879eb1fff"
+          service: "gh-runner-19c141d0-fc19-53bb-ad43-772879eb1fff"
+          desired-count: 2
+
+  test-self-hosted:
+    name: Testing self-hosted tag
+    needs: start-runner
+    runs-on: self-hosted
+    steps:
+      - name: step 1
+        run: echo "Hello World!"
+
+  test-internal-tools:
+    name: Testing internal tool connectivity
+    needs: start-runner
+    runs-on: self-hosted
+    steps:
+      - name: curl selenium
+        run: curl --connect-timeout 5 https://selenium.cloud.cms.gov
+      - name: curl artifactory
+        run: curl --connect-timeout 5 https://artifactory.cloud.cms.gov/ui/packages
+
+  stop-runners:
+    name: Deprovision self-hosted runners
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [start-runners, test-self-hosted, test-internal-tools]
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: us-east-1
+          role-to-assume: ${{ secrets.OIDC_IAM_ROLE_ARN }}
+
+      - name: Scale down ECS service
+        uses: Enterprise-CMCS/ecs-scale-service@main
+        with:
+          cluster: ${{ your self-hosted runner cluster }}
+          service: ${{ your self-hosted runner service }}
+          desired-count: 0
