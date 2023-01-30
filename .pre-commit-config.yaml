@@ -4,8 +4,8 @@ repos:
     hooks:
     -   id: check-json
     -   id: check-yaml
-#     -   id: trailing-whitespace
-#     -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
 -   repo: https://github.com/pre-commit/mirrors-eslint
     rev: v8.26.0
     hooks:
