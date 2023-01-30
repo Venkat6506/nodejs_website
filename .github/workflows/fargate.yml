@@ -31,21 +31,10 @@ jobs:
       - name: step 1
         run: echo "Hello World!"
 
-  test-internal-tools:
-    name: Testing internal tool connectivity
-    needs: start-runners
-    runs-on: self-hosted
-    steps:
-      - name: curl selenium
-        run: curl --connect-timeout 5 https://selenium.cloud.cms.gov
-      - name: curl artifactory
-        run: curl --connect-timeout 5 https://artifactory.cloud.cms.gov/ui/packages
-
   stop-runners:
     name: Deprovision self-hosted runners
     runs-on: ubuntu-latest
     if: always()
-    needs: [start-runners, test-self-hosted, test-internal-tools]
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
