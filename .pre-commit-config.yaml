@@ -7,6 +7,6 @@ repos:
 #     -   id: trailing-whitespace
 #     -   id: end-of-file-fixer
 - repo: https://github.com/Venkat6506/nodejs_website.git
-  rev: v4.3.0
+  rev: main
   hooks:
     - id: snyk-audit
