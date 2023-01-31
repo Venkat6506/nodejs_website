@@ -1,0 +1,76 @@
+name: infra-aws-core
+on:
+  workflow_dispatch:
+    inputs:
+      Env:
+        description: 'Environment'
+        required: true
+        default: 'ne6'
+      LaunchMode:
+        description: 'Launch mode for Github runner'
+        required: true
+        default: 'EC2'
+        options:
+          - EC2
+          - FARGATE
+jobs:
+  activate-github-runner:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.Env }}
+    permissions:
+      id-token: write
+      contents: read
+    outputs:
+      gitrunner_vm_id: ${{ steps.runner-label.outputs.vm_id }}
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@master
+        with:
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Check identity
+        id: validate
+        run: |
+          aws sts get-caller-identity
+      - name: Generate Runner label
+        id: runner-label
+        run: |
+          task_vm_id=$(uuidgen)
+          echo "::set-output name=vm_id::$task_vm_id"
+          echo "VM ID generated $task_vm_id"
+      - name: Identify applicable configuration
+        id: task-config
+        run: |
+          if [[ "${{ github.event.inputs.LaunchMode }}" == "EC2" ]];
+          then
+            echo "::set-output name=NET_CONFIG::"
+            echo "::set-output name=TASK_DEF_NAME::${{ github.event.inputs.Env }}_ec2_git_runner"
+          else
+            echo "::set-output name=NET_CONFIG::--network-configuration 'awsvpcConfiguration={subnets=[${{ secrets.SUBNET }}],securityGroups=[${{ secrets.SECURITY_GROUP }}],assignPublicIp=ENABLED}'"
+            echo "::set-output name=TASK_DEF_NAME::${{ github.event.inputs.Env }}_fg_git_runner"
+          fi
+        shell: bash
+      - name: Start ECS Task for Github self-hosted runner
+        id: create-task
+        run: >
+          aws ecs run-task 
+          --cluster "${{ github.event.inputs.Env }}_git_runner" --launch-type "${{ github.event.inputs.LaunchMode }}" 
+          --task-definition "${{ steps.task-config.outputs.TASK_DEF_NAME }}" 
+          --overrides '{"containerOverrides": [{"name": "${{ steps.task-config.outputs.TASK_DEF_NAME }}",
+          "environment" : [{"name": "RUNNER_NAME", "value": "${{ steps.task-config.outputs.TASK_DEF_NAME }}-${{ steps.runner-label.outputs.vm_id }}"},
+          {"name": "RUNNER_LABELS", "value": "${{ steps.runner-label.outputs.vm_id }}"},
+          {"name": "GITHUB_PAT", "value": "${{ secrets.RUNNER_PAT }}"}
+          ]}]}'
+          ${{ steps.task-config.outputs.NET_CONFIG }}
+
+  build-code:
+    needs: [activate-github-runner]
+    runs-on: [self-hosted, "${{ needs.activate-github-runner.outputs.gitrunner_vm_id }}"]
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Testing build
+        run: |
+          MY_WD=$(pwd)
+          echo "Hello world ${MY_WD}"
