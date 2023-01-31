@@ -2,6 +2,9 @@
 # The workflow Creates static website using aws s3
 name: AWS example workflow
 on: workflow_dispatch
+env:
+  BUCKET_NAME : "test"
+  AWS_REGION : "us-east-1"
 # permission can be added at job level or workflow level    
 permissions:
       id-token: write   # This is required for requesting the JWT
@@ -17,7 +20,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::128230169866:role/runner
           role-session-name: samplerolesession
-          aws-region: us-east-1
+          aws-region: ${{ env.AWS_REGION }}
       # Upload a file to AWS s3
       - name:  Copy index.html to s3
         run: |
