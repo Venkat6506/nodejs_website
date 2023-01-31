@@ -13,14 +13,16 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
           role-to-assume: ${{ secrets.OIDC_IAM_ROLE_ARN }}
 
       - name: Scale up ECS service
         uses: Enterprise-CMCS/ecs-scale-service@main
         with:
-          cluster: "gh-runner-19c141d0-fc19-53bb-ad43-772879eb1fff"
-          service: "gh-runner-19c141d0-fc19-53bb-ad43-772879eb1fff"
+          cluster: "gh-runner"
+          service: "gh-runner"
           desired-count: 2
 
   test-self-hosted:
@@ -39,12 +41,14 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
           role-to-assume: ${{ secrets.OIDC_IAM_ROLE_ARN }}
 
       - name: Scale down ECS service
         uses: Enterprise-CMCS/ecs-scale-service@main
         with:
-          cluster: ${{ your self-hosted runner cluster }}
-          service: ${{ your self-hosted runner service }}
+          cluster: "gh-runner"
+          service: "gh-runner"
           desired-count: 0
