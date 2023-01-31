@@ -34,3 +34,22 @@ jobs:
     steps:
       - name: step 1
         run: echo "Hello World!"
+        
+  stop-runners:
+    name: Deprovision self-hosted runners
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::128230169866:role/runner
+          role-session-name: samplerolesession
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Scale down ECS service
+        uses: Enterprise-CMCS/ecs-scale-service@main
+        with:
+          cluster: "gh-runner"
+          service: "gh-runner"
+          desired-count: 0
