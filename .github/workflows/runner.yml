@@ -26,7 +26,7 @@ jobs:
         with:
           cluster: "gh-runner"
           service: "gh-runner"
-          desired-count: 3
+          desired-count: 1
 
   test-self-hosted:
     name: Testing self-hosted tag
@@ -38,6 +38,7 @@ jobs:
   stop-runners:
     name: Deprovision self-hosted runners
     runs-on: ubuntu-latest
+    needs: test-self-hosted
     if: always()
     steps:
       - name: configure aws credentials
