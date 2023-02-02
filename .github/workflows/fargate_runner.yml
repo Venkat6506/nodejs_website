@@ -25,7 +25,7 @@ jobs:
         uses: Enterprise-CMCS/ecs-scale-service@main
         with:
           cluster: "gh-runner"
-          service: "runner"
+          service: "gh-runner"
           desired-count: 1
 
   test-self-hosted:
@@ -52,5 +52,5 @@ jobs:
         uses: Enterprise-CMCS/ecs-scale-service@main
         with:
           cluster: "gh-runner"
-          service: "runner"
+          service: "gh-runner"
           desired-count: 0
