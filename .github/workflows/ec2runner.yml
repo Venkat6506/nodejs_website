@@ -1,4 +1,4 @@
-name: do-the-job
+name: ec2-on-demand-runner
 on: workflow_dispatch
 jobs:
   start-runner:
