@@ -24,7 +24,6 @@ jobs:
           ec2-instance-type: t3.nano
           subnet-id: subnet-05d06569e12a55837
           security-group-id: sg-0aad1c46760920421
-#           iam-role-name: my-role-name # optional, requires additional permissions
           aws-resource-tags: > # optional, requires additional permissions
             [
               {"Key": "Name", "Value": "ec2-github-runner"},
