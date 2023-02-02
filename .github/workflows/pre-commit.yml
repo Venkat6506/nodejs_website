@@ -4,7 +4,7 @@ on: workflow_dispatch
 jobs:
   pre-commit:
 #     runs-on: ubuntu-latest
-    runs-on: 6brtw
+    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v3
     - name: mode1
