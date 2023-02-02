@@ -22,10 +22,10 @@ jobs:
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           ec2-image-id: ami-0a4e37a4ec6564842
           ec2-instance-type: t3.nano
-          subnet-id: subnet-05d06569e12a55837
-          security-group-id: sg-0aad1c46760920421
-#           subnet-id: subnet-0910055dd4014479b
-#           security-group-id: sg-06e156ca1a9be88b9
+#           subnet-id: subnet-05d06569e12a55837
+#           security-group-id: sg-0aad1c46760920421
+          subnet-id: subnet-0910055dd4014479b
+          security-group-id: sg-06e156ca1a9be88b9
           aws-resource-tags: > # optional, requires additional permissions
             [
               {"Key": "Name", "Value": "ec2-github-runner"},
