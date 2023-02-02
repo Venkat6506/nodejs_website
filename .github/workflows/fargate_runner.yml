@@ -26,7 +26,7 @@ jobs:
         with:
           cluster: "gh-runner"
           service: "gh-runner"
-          desired-count: 1
+          desired-count: 3
 
   test-self-hosted:
     name: Testing self-hosted tag
