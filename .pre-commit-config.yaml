@@ -6,7 +6,3 @@ repos:
     -   id: check-yaml
 #     -   id: trailing-whitespace
 #     -   id: end-of-file-fixer
--   repo: https://github.com/Venkat6506/nodejs_website
-    rev: v1.0.0
-    hooks:
-    - id: snyk-test
