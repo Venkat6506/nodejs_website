@@ -3,7 +3,8 @@ on: workflow_dispatch
 jobs:   
   PRECOMMIT:
     name: PRECOMMIT
-    runs-on: ubuntu-latest
+#     runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v3
